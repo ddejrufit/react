@@ -44,9 +44,32 @@ function App() {
     <h4>{글제목[2]}</h4>
     <p>2월 17일 발행</p>
     </div>
+
+   <Modal/>
     
   </div>
   );
 }
+
+// 컴포넌트 문법
+// state 사용시 어려움 발생
+
+// const Modal = ()=>{
+//   return(
+//     asdfsadf
+//   )
+// }
+
+function Modal(){
+  return(
+    
+    <div className='modal'>
+      <h4>제목</h4>
+      <p>날짜</p>
+      <p>상세내용</p>
+    </div>
+  )
+}
+
 
 export default App
