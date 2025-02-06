@@ -33,15 +33,15 @@ function App() {
         글제목변경(copy);
       }}>글수정</button>
     <div className='list'>
-    <h4>{글제목[0]} <span onClick={()=>{ 개추(추천수 + 1) }}>👍</span> {추천수} </h4>
+    <h4 onClick={()=>{setModal(!modal)}}>{글제목[0]} <span onClick={()=>{ 개추(추천수 + 1) }}>👍</span> {추천수} </h4>
     <p>2월 17일 발행</p>
     </div>
     <div className='list'>
-    <h4>{글제목[1]}</h4>
+    <h4 onClick={()=>{setModal(!modal)}}>{글제목[1]}</h4>
     <p>2월 17일 발행</p>
     </div>
     <div className='list'>
-    <h4>{글제목[2]}</h4>
+    <h4 onClick={()=>{setModal(!modal)}}>{글제목[2]}</h4>
     <p>2월 17일 발행</p>
     </div>
 
