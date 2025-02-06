@@ -8,7 +8,7 @@ function App() {
   let [글제목, 글제목변경] = useState(['남자 코트 추천','맛집추천','파이썬독학'])
 
   let [추천수, 개추] = useState(0);
-
+  let [modal, setModal] = useState(0);
   // state = 자주변경되는 html 자동으로 재랜더링 해줘서
 
 
@@ -45,7 +45,11 @@ function App() {
     <p>2월 17일 발행</p>
     </div>
 
-   <Modal/>
+
+      {
+        modal == 1 ? <Modal/> : null
+      }
+   
     
   </div>
   );
