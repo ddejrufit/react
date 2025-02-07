@@ -4,7 +4,6 @@ import './App.css'
 
 function App() {
 
-  let post = '강남 우동 맛집';
   let [글제목, 글제목변경] = useState(['남자 코트 추천','맛집추천','파이썬독학'])
 
   let [추천수, 개추] = useState([0,0,0]);
@@ -12,7 +11,11 @@ function App() {
   let [modal, setModal] = useState(0);
   // state = 자주변경되는 html 자동으로 재랜더링 해줘서
 
-  
+  function tg(){
+    let copy = [...글제목];
+        copy[0] = '여자코트 추천';
+        글제목변경(copy);
+  }
 
   return (
   <div className='App'>
@@ -56,17 +59,21 @@ function App() {
                 let copy = [...추천수]
                 copy[i]++;
                 개추(copy)
-                 }}>👍</span> {추천수[i]} </h4>
+                 }}>👍</span> {추천수[i]} 
+                 </h4>
             <p>2월 17일 발행</p>
              </div>
           )
         })
       }
 
+
+
       {
-        modal == 1 ? <Modal/> : null
+        modal == true ? <Modal tg={tg}  글제목={글제목}/> : null
+        
       }
-   
+
     
   </div>
   );
@@ -81,13 +88,14 @@ function App() {
 //   )
 // }
 
-function Modal(){
+
+function Modal(props){
   return(
-    
     <div className='modal'>
-      <h4>제목</h4>
+      <h4>{props.글제목[0]}</h4>
       <p>날짜</p>
       <p>상세내용</p>
+      <button onClick={props.tg}>글수정</button>
     </div>
   )
 }
