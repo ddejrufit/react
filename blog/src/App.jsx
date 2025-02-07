@@ -9,7 +9,11 @@ function App() {
   let [추천수, 개추] = useState([0,0,0]);
 
   let [modal, setModal] = useState(0);
+
+  let [title, setTitle] = useState(0); 
   // state = 자주변경되는 html 자동으로 재랜더링 해줘서
+
+
 
   function tg(){
     let copy = [...글제목];
@@ -54,7 +58,10 @@ function App() {
         글제목.map(function(a, i){
           return  (
             <div className='list' key={i}>
-            <h4 onClick={()=>{setModal(!modal)}}>{ 글제목[i] } 
+            <h4 onClick={()=>{
+              setModal(!modal)
+              setTitle(i)
+            }}>{글제목[i]} 
               <span onClick={()=>{
                 let copy = [...추천수]
                 copy[i]++;
@@ -70,7 +77,7 @@ function App() {
 
 
       {
-        modal == true ? <Modal tg={tg}  글제목={글제목}/> : null
+        modal == true ? <Modal  title={title} tg={tg}  글제목={글제목}/> : null
         
       }
 
@@ -91,12 +98,16 @@ function App() {
 
 function Modal(props){
   return(
-    <div className='modal'>
-      <h4>{props.글제목[0]}</h4>
+
+      <div className='modal'>
+      <h4>{ 
+      props.글제목[props.title]}</h4>
       <p>날짜</p>
       <p>상세내용</p>
       <button onClick={props.tg}>글수정</button>
     </div>
+    
+    
   )
 }
 
