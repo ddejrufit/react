@@ -13,7 +13,7 @@ function App() {
   let [title, setTitle] = useState(0); 
   // state = 자주변경되는 html 자동으로 재랜더링 해줘서
 
-
+  let [입력값, 입력값변경] = useState('');
 
   function tg(){
     let copy = [...글제목];
@@ -62,18 +62,33 @@ function App() {
               setModal(!modal)
               setTitle(i)
             }}>{글제목[i]} 
-              <span onClick={()=>{
+              <span onClick={(e)=>{
+                e.stopPropagation();
                 let copy = [...추천수]
                 copy[i]++;
                 개추(copy)
                  }}>👍</span> {추천수[i]} 
                  </h4>
             <p>2월 17일 발행</p>
+            <button onClick={()=>{
+             let copy=[...글제목];
+             copy.splice(i,1)
+             글제목변경(copy)
+              }}>삭제</button>
              </div>
           )
         })
       }
 
+      <input  onChange={(e)=>{ 
+        입력값변경(e.target.value);
+        
+      }} />
+      <button onClick={()=>{
+             let copy=[...글제목];
+             copy.splice(0, 0, 입력값)
+             글제목변경(copy)
+              }}>등록</button>
 
 
       {
@@ -111,5 +126,8 @@ function Modal(props){
   )
 }
 
+const delClick =()=>{
+  
+}
 
 export default App
