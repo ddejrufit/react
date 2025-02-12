@@ -1,0 +1,9 @@
+.navbar {
+  
+  position: fixed; /* 또는 fixed */
+  top: 0;
+  width: 100vw;
+}
+
+
+
