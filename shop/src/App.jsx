@@ -4,14 +4,19 @@ import './App.css'
 import bg from './img/bg.png';
 import {useState} from "react";
 import data from './data.js'
+import {Routes, Route,Link} from 'react-router-dom'
 
 function App() {
 
   let [shoes] = useState(data)
 
   return (
-    <div className='bar'>
+    <div className='App'>
       
+  
+
+
+
         <Navbar bg="dark" data-bs-theme="dark" >
         <Container>
           <Navbar.Brand href="#home">쇼핑몰</Navbar.Brand>
@@ -21,20 +26,28 @@ function App() {
           </Nav>
         </Container>
       </Navbar>
-    <br />
-      <div className='main-bg' style={{ backgroundImage : 'url(' + bg + ')'}}></div>
+      <Link to="/">home</Link>
+    <Link to="/detail">상세페이지</Link>
+
+      <Routes>
+      <Route path='/' element={
+        <div> <div className='main-bg' style={{ backgroundImage : 'url(' + bg + ')'}}></div>
       <div className="container">
         <div className="row">
       {
       shoes.map(function(a,i){
         return(
-        <List shoes={shoes} i={i}/>
+        <Card shoes={shoes} i={i}/>
         )
       })
       }
         </div>
       </div> 
-      
+      </div>}/>
+      <Route path='/detail' element={<div>디테일</div>}/>
+      </Routes>
+
+     
 
 
     
@@ -45,7 +58,7 @@ function App() {
 }
 
 
-function List(props){
+function Card(props){
   return(
     <div className="col-md-4">
     <img src={`https://codingapple1.github.io/shop/shoes${props.i + 1}.jpg`} width={"80%"}/>
