@@ -4,11 +4,13 @@ import './App.css'
 import bg from './img/bg.png';
 import {useState} from "react";
 import data from './data.js'
-import {Routes, Route,Link} from 'react-router-dom'
+import {Routes, Route,Link, useNavigate, Outlet} from 'react-router-dom'
+import Detail  from './routes/Detail.jsx';
 
 function App() {
 
   let [shoes] = useState(data)
+  let navigate = useNavigate();
 
   return (
     <div className='App'>
@@ -21,38 +23,38 @@ function App() {
         <Container>
           <Navbar.Brand href="#home">쇼핑몰</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#cart">cart</Nav.Link>
+            <Nav.Link onClick={()=>{navigate('/')}}>Home</Nav.Link>
+            <Nav.Link onClick={()=>{navigate('/detail')}}>Detail</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
-      <Link to="/">home</Link>
-    <Link to="/detail">상세페이지</Link>
+
 
       <Routes>
       <Route path='/' element={
-        <div> <div className='main-bg' style={{ backgroundImage : 'url(' + bg + ')'}}></div>
+        <div>
+         <div className='main-bg' style={{ backgroundImage : 'url(' + bg + ')'}}></div>
       <div className="container">
         <div className="row">
       {
       shoes.map(function(a,i){
-        return(
-        <Card shoes={shoes} i={i}/>
-        )
-      })
-      }
+        return <Card shoes={shoes} i={i}/>
+       })}
         </div>
       </div> 
       </div>}/>
-      <Route path='/detail' element={
-        <div className="container">
-        <div className="row">
-      
-          <Product />
-     
-    </div>
-    </div> 
-        }/>
+      <Route path='/detail' element={<Detail /> }/>
+
+      <Route path='/about' element={<About />}>
+        <Route path='member' element={<>멤버임</>}/>
+        <Route path='location' element={<>위치임</> }/>  
+      </Route>
+
+      <Route path='/event' element={<Event />}>
+        <Route path='one' element={<p>첫 주문시 양배추즙 서비스</p>}/>
+        <Route path='two' element={<>생일기념 쿠폰받기</> }/>  
+      </Route>
+
       </Routes>
 
      
@@ -65,23 +67,25 @@ function App() {
   );
 }
 
-function Product(){
+function About(){
   return(
-    <div className="container">
-    <div className="row">
-      <div className="col-md-6">
-        <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" />
-      </div>
-      <div className="col-md-6">
-        <h4 className="pt-5">상품명</h4>
-        <p>상품설명</p>
-        <p>120000원</p>
-        <button className="btn btn-danger">주문하기</button> 
-      </div>
+    <div>
+      <h4>회사정보임</h4>
+      <Outlet></Outlet>
     </div>
-  </div> 
   )
 }
+
+function Event(){
+  return(
+  <div>
+    <h4>오늘의 이벤트</h4>
+    <Outlet></Outlet>
+
+  </div>
+  )
+}
+
 
 
 function Card(props){
