@@ -2,15 +2,20 @@
 import {Container,Nav,Navbar} from 'react-bootstrap';
 import './App.css'
 import bg from './img/bg.png';
-import {useState} from "react";
+import {useEffect,useState} from "react";
 import data from './data.js'
-import {Routes, Route,Link, useNavigate, Outlet} from 'react-router-dom'
+import {Routes, Route, useNavigate, Outlet} from 'react-router-dom'
 import Detail  from './routes/Detail.jsx';
+import axios from 'axios';
 
 function App() {
 
-  let [shoes] = useState(data)
+  let [shoes,setShoes] = useState(data)
   let navigate = useNavigate();
+
+
+
+
 
   return (
     <div className='App'>
@@ -57,6 +62,19 @@ function App() {
       </Route>
 
       </Routes>
+
+       <button onClick={()=>{
+        axios.get('https://codingapple1.github.io/shop/data2.json')
+        .then((결과)=>{ 
+          setShoes(
+           shoes=[
+            ...shoes,
+            ...결과.data
+           ])
+        }   
+
+      )
+       }}>더보기</button>
 
      
 
