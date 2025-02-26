@@ -64,16 +64,28 @@ function App() {
       </Routes>
 
        <button onClick={()=>{
+        <>로딩중❤❤</>
         axios.get('https://codingapple1.github.io/shop/data2.json')
         .then((결과)=>{ 
-          setShoes(
-           shoes=[
+          let copy=[
             ...shoes,
             ...결과.data
-           ])
-        }   
+           ]
+           setShoes(copy)
+        })
 
-      )
+        // json을 array 또는 object로 고치기 어려움
+        // fetch('https://codingapple1.github.io/shop/data2.json')
+        // .then(결과=>결과.json())
+        // .then(data=>{})
+
+        // 둘다 성공하면 ㄱㄱ
+        // Promise.all([axios.get('/url1'),axios.get('/url2') ])
+        // .then(()=>{
+
+        // })
+ 
+
        }}>더보기</button>
 
      
