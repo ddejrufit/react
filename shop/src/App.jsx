@@ -7,6 +7,7 @@ import data from './data.js'
 import {Routes, Route, useNavigate, Outlet} from 'react-router-dom'
 import Detail  from './routes/Detail.jsx';
 import axios from 'axios';
+let a = 0;
 
 function App() {
 
@@ -62,17 +63,34 @@ function App() {
       </Route>
 
       </Routes>
-
+       
        <button onClick={()=>{
-        <>로딩중❤❤</>
-        axios.get('https://codingapple1.github.io/shop/data2.json')
+        
+        if (a == 0) {
+          axios.get('https://codingapple1.github.io/shop/data2.json')
         .then((결과)=>{ 
           let copy=[
             ...shoes,
             ...결과.data
            ]
            setShoes(copy)
+           a++;
         })
+        }else if (a == 1) {
+          axios.get('https://codingapple1.github.io/shop/data3.json')
+        .then((결과)=>{ 
+          let copy=[
+            ...shoes,
+            ...결과.data
+           ]
+           a++;
+           setShoes(copy)
+        })
+        document.querySelector('#asd').innerHTML = ''
+
+        }
+        
+        
 
         // json을 array 또는 object로 고치기 어려움
         // fetch('https://codingapple1.github.io/shop/data2.json')
@@ -86,7 +104,7 @@ function App() {
         // })
  
 
-       }}>더보기</button>
+       }} id='asd'>더보기</button>
 
      
 
