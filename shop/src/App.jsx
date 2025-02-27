@@ -47,24 +47,7 @@ function App() {
         return <Card shoes={shoes} i={i}/>
        })}
         </div>
-      </div> 
-      </div>}/>
-      <Route path='/detail/:id' element={<Detail  shoes={shoes}/> }/>
-
-
-      <Route path='/about' element={<About />}>
-        <Route path='member' element={<>멤버임</>}/>
-        <Route path='location' element={<>위치임</> }/>  
-      </Route>
-
-      <Route path='/event' element={<Event />}>
-        <Route path='one' element={<p>첫 주문시 양배추즙 서비스</p>}/>
-        <Route path='two' element={<>생일기념 쿠폰받기</> }/>  
-      </Route>
-
-      </Routes>
-       
-       <button onClick={()=>{
+        <button onClick={()=>{
         
         if (a == 0) {
           axios.get('https://codingapple1.github.io/shop/data2.json')
@@ -106,6 +89,24 @@ function App() {
 
        }} id='asd'>더보기</button>
 
+      </div> 
+      </div>}/>
+      <Route path='/detail/:id' element={<Detail  shoes={shoes}/> }/>
+
+
+      <Route path='/about' element={<About />}>
+        <Route path='member' element={<>멤버임</>}/>
+        <Route path='location' element={<>위치임</> }/>  
+      </Route>
+
+      <Route path='/event' element={<Event />}>
+        <Route path='one' element={<p>첫 주문시 양배추즙 서비스</p>}/>
+        <Route path='two' element={<>생일기념 쿠폰받기</> }/>  
+      </Route>
+
+      </Routes>
+       
+       
      
 
 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled  from "styled-components";
+import { Nav } from "react-bootstrap";
 
 let YellowBtn = styled.button`
   background : ${props => props.bg };
@@ -21,6 +22,7 @@ function Detail(props){
   let [count , setCount] = useState(0)
   let [sale , setSale] = useState(true)
   let [type, setType] = useState('')
+  let [탭, 탭변경] =useState(0)
 
   let {id} = useParams();
 
@@ -84,8 +86,35 @@ function Detail(props){
           <button className="btn btn-danger">주문하기</button> 
         </div>
       </div>
+
+
+      <Nav variant="tabs"  defaultActiveKey="link0">
+    <Nav.Item>
+      <Nav.Link eventKey="link0" onClick={()=>{탭변경(0)}}>버튼0</Nav.Link>
+    </Nav.Item>
+    <Nav.Item>
+      <Nav.Link eventKey="link1" onClick={()=>{탭변경(1)}}>버튼1</Nav.Link>
+    </Nav.Item>
+    <Nav.Item>
+      <Nav.Link eventKey="link2" onClick={()=>{탭변경(2)}}>버튼2</Nav.Link>
+    </Nav.Item>
+</Nav>
+<TabContent 탭={탭}></TabContent>
+
+
+
+
     </div> 
     )
   }
 
+  function TabContent({탭}){
+  if (탭 == 0) {
+    return <>내용0</>
+  }if (탭 == 1) {
+    return <>내용1</>
+  }if (탭 == 2) {
+    return <>내용2</>
+  }
+}
   export default Detail;
