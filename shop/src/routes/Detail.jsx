@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled  from "styled-components";
 import { Nav } from "react-bootstrap";
+
+import {Context1} from "./../App.jsx";
 
 let YellowBtn = styled.button`
   background : ${props => props.bg };
@@ -17,15 +19,14 @@ let Box  = styled.div`
 
 function Detail(props){
 
-
+  let {재고} = useContext(Context1)
 
   let [count , setCount] = useState(0)
   let [sale , setSale] = useState(true)
   let [type, setType] = useState('')
   let [탭, 탭변경] =useState(0)
-
   let {id} = useParams();
-
+  let [open, setOpen] = useState('')
   useEffect(()=>{
    let a = setTimeout(()=>{ setSale(false)},2000)
     console.log(2)
@@ -45,6 +46,12 @@ function Detail(props){
    
    }, [type])
 
+    useEffect(()=>{  
+     
+        setOpen('end') 
+    return()=>{
+    setOpen('')
+    }}, [])
     // useEffect(()=>{ }) 재랜더링마다 코드 실행
     // useEffect(()=>{ }, []) mount시 1회 코드 실행
     // useEffect(()=>{ }, [a]) a 변경시 코드 실행
@@ -61,7 +68,7 @@ function Detail(props){
     }
 
     return(
-      <div className="container">
+      <div className={"container start "+ open}>
         <Box>
         <YellowBtn bg="blue" onClick={()=>{setCount(count+1)}}>버튼</YellowBtn>
         <YellowBtn bg="orange">버튼</YellowBtn>
@@ -74,8 +81,8 @@ function Detail(props){
         }
 
         <input type="text" value={type} onChange={onChangeType}/>
-
       <div className="row">
+        {재고}
         <div className="col-md-6">
           <img src={`https://codingapple1.github.io/shop/shoes1.jpg`} width="100%" />
         </div>
@@ -99,7 +106,7 @@ function Detail(props){
       <Nav.Link eventKey="link2" onClick={()=>{탭변경(2)}}>버튼2</Nav.Link>
     </Nav.Item>
 </Nav>
-<TabContent 탭={탭}></TabContent>
+<TabContent shoes ={props.shoes} 탭={탭}></TabContent>
 
 
 
@@ -108,13 +115,18 @@ function Detail(props){
     )
   }
 
-  function TabContent({탭}){
-  if (탭 == 0) {
-    return <>내용0</>
-  }if (탭 == 1) {
-    return <>내용1</>
-  }if (탭 == 2) {
-    return <>내용2</>
-  }
+  function TabContent({탭, shoes}){
+    let [fade, setFade] = useState('')
+    useEffect(()=>{
+      setTimeout(()=>{ setFade('end') },100)
+
+      return()=>{
+      setFade('')
+      }
+    }, [탭])
+
+    return(<div className={`start ${fade}`}>
+ {[<>{shoes[0].title}</>, <>내용1</>, <>내용2</>][탭]}
+ </div>)
 }
   export default Detail;

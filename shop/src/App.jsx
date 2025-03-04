@@ -2,11 +2,14 @@
 import {Container,Nav,Navbar} from 'react-bootstrap';
 import './App.css'
 import bg from './img/bg.png';
-import {useEffect,useState} from "react";
+import {createContext,useEffect,useState} from "react";
 import data from './data.js'
 import {Routes, Route, useNavigate, Outlet} from 'react-router-dom'
 import Detail  from './routes/Detail.jsx';
 import axios from 'axios';
+
+export let Context1 = createContext()
+
 let a = 0;
 
 function App() {
@@ -14,7 +17,7 @@ function App() {
   let [shoes,setShoes] = useState(data)
   let navigate = useNavigate();
 
-
+  let [재고, 재고변경] = useState([10,11,12]);
 
 
 
@@ -91,7 +94,11 @@ function App() {
 
       </div> 
       </div>}/>
-      <Route path='/detail/:id' element={<Detail  shoes={shoes}/> }/>
+      <Route path='/detail/:id' element={
+        <Context1.Provider value={{ 재고 , shoes }}>
+        <Detail  shoes={shoes}/> 
+         </Context1.Provider>
+        }/>
 
 
       <Route path='/about' element={<About />}>
