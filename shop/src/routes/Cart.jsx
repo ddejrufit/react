@@ -1,13 +1,13 @@
 import {Table} from 'react-bootstrap'
+import { useSelector } from 'react-redux'
 
 function Cart(){
 
 
-
-
-
-
+  let listData = useSelector((state)=>{ return state})
+  console.log(listData.user[0])
   
+
     return(
         <div>
             <Table>
@@ -20,17 +20,26 @@ function Cart(){
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>1</td>
-      <td>안녕</td>
-      <td>안녕</td>
-      <td>안녕</td>
-    </tr>
+  {
+    listData.user.map(function(a,i){
+    return <List listData={listData} i={i}/>
+    })}
+
   </tbody>
 </Table> 
         </div>
     )
 }
 
+function List(props){
+  return(
+  <tr>
+      <td>{props.listData.user[props.i].id}</td>
+      <td>{props.listData.user[props.i].name}</td>
+      <td>{props.listData.user[props.i].count}</td>
+      <td>0</td>
+    </tr>
+  )
+}
 
 export default Cart
