@@ -1,6 +1,6 @@
-import {Table} from 'react-bootstrap'
+import {Form, Table} from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { changeName } from '../store.jsx'
+import { changeName,increase } from "./../store/userSlice.jsx"
 
 function Cart(){
 
@@ -11,7 +11,11 @@ function Cart(){
 
     return(
         <div>
-          {state.user}의 장바구니
+          <h6>{state.user.name} {state.user.age}의 장바구니</h6>
+          <button onClick={()=>{
+            dispatch(increase(1))
+            
+          }}>버튼</button>
             <Table>
   <thead>
     <tr>
@@ -32,6 +36,7 @@ function Cart(){
         </div>
     )
 }
+import { formToJSON } from 'axios'
 
 function List(props){
   return(
@@ -42,7 +47,7 @@ function List(props){
       <td>
         <button onClick={()=>{
           props.dispatch(changeName())
-        }}>+</button>
+        }} >+</button>
       </td>
     </tr>
   )
