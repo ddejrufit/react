@@ -2,8 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled  from "styled-components";
 import { Nav } from "react-bootstrap";
-
 import {Context1} from "./../App.jsx";
+import { addItem } from "../store.jsx";
+import { useDispatch } from "react-redux";
 
 let YellowBtn = styled.button`
   background : ${props => props.bg };
@@ -20,13 +21,13 @@ let Box  = styled.div`
 function Detail(props){
 
   let {재고} = useContext(Context1)
-
   let [count , setCount] = useState(0)
   let [sale , setSale] = useState(true)
   let [type, setType] = useState('')
   let [탭, 탭변경] =useState(0)
   let {id} = useParams();
   let [open, setOpen] = useState('')
+  let dispatch = useDispatch()
   useEffect(()=>{
    let a = setTimeout(()=>{ setSale(false)},2000)
     console.log(2)
@@ -90,7 +91,9 @@ function Detail(props){
           <h4 className="pt-5">{props.shoes[id].title}</h4>
           <p>{props.shoes[id].content}</p>
           <p>{props.shoes[id].price}원</p>
-          <button className="btn btn-danger">주문하기</button> 
+          <button className="btn btn-danger" onClick={()=>{
+            dispatch(addItem( {id : 1, name : 'Red Knit', count : 1} ))
+          }}>주문하기</button> 
         </div>
       </div>
 

@@ -1,6 +1,7 @@
 import {Form, Table} from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { changeName,increase } from "./../store/userSlice.jsx"
+import { addCount } from '../store.jsx'
 
 function Cart(){
 
@@ -41,13 +42,13 @@ import { formToJSON } from 'axios'
 function List(props){
   return(
   <tr>
-      <td>{props.i + 1}</td>
+      <td>{props.state.cart[props.i].id}</td>
       <td>{props.state.cart[props.i].name}</td>
       <td>{props.state.cart[props.i].count}</td>
       <td>
         <button onClick={()=>{
-          props.dispatch(changeName())
-        }} >+</button>
+          props.dispatch(addCount(props.state.cart[props.i].id))
+        }}>+</button>
       </td>
     </tr>
   )
