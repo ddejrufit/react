@@ -122,7 +122,7 @@ function Modal(props){
       <button onClick={props.tg}>글수정</button>
     </div>
     
-    
+  
   )
 }
 

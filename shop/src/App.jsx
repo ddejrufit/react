@@ -160,6 +160,64 @@ function Card(props){
   
   )
 }
+// // if 문(컴포넌트에만)
+// function Component() {
+//   if ( true ) {
+//     return <p>참이면 보여줄 HTML</p>;
+//   } //else{} 생략가능
+//   return null;
+// } 
 
+// // 삼항연산자 중첩가능
+// function Component() {
+//   return (
+//     <div>
+//       {
+//         1 === 1
+//         ? <p>참이면 보여줄 HTML</p>
+//         : ( 2 === 2 
+//             ? <p>안녕</p> 
+//             : <p>반갑</p> 
+//           )
+//       }
+//     </div>
+//   )
+// } 
 
+// // &&연산자
+// true && false; //false
+// true && true; //true
+
+// true && '안녕'; // '안녕'
+// false && '안녕';// 'false'
+// true && false && '안녕';//false
+
+// //switch / case 조건문
+// function Component2(){
+//   var user = 'seller';
+//   switch (user){
+//     case 'seller' :
+//       return <h4>판매자 로그인</h4>
+//     case 'customer' :
+//       return <h4>구매자 로그인</h4>
+//     default : 
+//       return <h4>그냥 로그인</h4>
+//   }
+// }
+// //object/array 자료형 응용 
+// function Component() {
+//   var 현재상태 = 'info';
+//   return (
+//     <div>
+//       {
+//         { 
+//            info : <p>상품정보</p>,
+//            shipping : <p>배송관련</p>,
+//            refund : <p>환불약관</p>
+//         }[현재상태]
+//       }
+
+//     </div>
+//   )
+// } 
 export default App
