@@ -16,9 +16,18 @@ let a = 0;
 
 function App() {
 
+  let obj = {name : 'kim'}
+  JSON.stringify(obj)
+  localStorage.setItem('data',JSON.stringify(obj))
+  
+  // let 꺼낸거 = localStorage.getItem('data')
+  // JSON.parse(꺼낸거)
+  // console.log(JSON.parse(꺼낸거).name);
+  
+
+
   let [shoes,setShoes] = useState(data)
   let navigate = useNavigate();
-
   let [재고, 재고변경] = useState([10,11,12]);
 
 
@@ -50,7 +59,7 @@ function App() {
         <div className="row">
       {
       shoes.map(function(a,i){
-        return <Card shoes={shoes} i={i}/>
+        return <Card shoes={shoes} i={i} navigate={navigate}/>
        })}
         </div>
         <button onClick={()=>{
@@ -152,7 +161,7 @@ function Event(){
 function Card(props){
   return(
     <div className="col-md-4">
-    <img src={`https://codingapple1.github.io/shop/shoes${props.i + 1}.jpg`} width={"80%"}/>
+    <img src={`https://codingapple1.github.io/shop/shoes${props.i + 1}.jpg`} width={"80%"} onClick={()=>{props.navigate(`/detail/${props.i}`)}}/>
       <h4>{props.shoes[props.i].title}</h4>
       <p>{props.shoes[props.i].price}</p>
     </div>

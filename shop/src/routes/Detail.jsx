@@ -17,8 +17,21 @@ let Box  = styled.div`
 `
 
 
+let asd = []
 
 function Detail(props){
+
+  useEffect(()=>{
+
+  localStorage.setItem('watched',JSON.stringify( asd ))
+  asd.push(props.shoes[id].id)
+
+  asd = new Set(asd)
+  asd = Array.from(asd)
+  },[])
+
+
+  
 
   let {재고} = useContext(Context1)
   let [count , setCount] = useState(0)
@@ -30,10 +43,10 @@ function Detail(props){
   let dispatch = useDispatch()
   useEffect(()=>{
    let a = setTimeout(()=>{ setSale(false)},2000)
-    console.log(2)
+    // console.log(2)
 
     return ()=>{
-      console.log(1)
+      // console.log(1)
       clearTimeout(a)
     }
   },[])
@@ -85,7 +98,7 @@ function Detail(props){
       <div className="row">
         {재고}
         <div className="col-md-6">
-          <img src={`https://codingapple1.github.io/shop/shoes1.jpg`} width="100%" />
+          <img src={`https://codingapple1.github.io/shop/shoes${props.shoes[id].id + 1}.jpg`} width="100%" />
         </div>
         <div className="col-md-6 mt-4">
           <h4 className="pt-5">{props.shoes[id].title}</h4>
