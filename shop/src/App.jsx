@@ -16,6 +16,11 @@ let a = 0;
 
 function App() {
 
+  useEffect(()=>{
+    localStorage.setItem('watched', JSON.stringify([]))
+
+  },[])
+  
   let obj = {name : 'kim'}
   JSON.stringify(obj)
   localStorage.setItem('data',JSON.stringify(obj))

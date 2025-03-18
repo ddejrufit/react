@@ -17,17 +17,17 @@ let Box  = styled.div`
 `
 
 
-let asd = []
 
 function Detail(props){
 
   useEffect(()=>{
-
-  localStorage.setItem('watched',JSON.stringify( asd ))
+  let asd = localStorage.getItem('watched')
+  asd = JSON.parse(asd)
   asd.push(props.shoes[id].id)
-
   asd = new Set(asd)
   asd = Array.from(asd)
+  localStorage.setItem('watched',JSON.stringify( asd ))
+
   },[])
 
 
