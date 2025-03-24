@@ -2,13 +2,17 @@
 import {Container,Nav,Navbar} from 'react-bootstrap';
 import './App.css'
 import bg from './img/bg.png';
-import {createContext,useEffect,useState} from "react";
+import {createContext,lazy,Suspense,useEffect,useState} from "react";
 import data from './data.js'
 import {Routes, Route, useNavigate, Outlet} from 'react-router-dom'
-import Detail  from './routes/Detail.jsx';
+// import Detail  from './routes/Detail.jsx';
 import axios from 'axios';
 import Cart from './routes/Cart.jsx'
 import { useQuery } from 'react-query';
+
+
+  // 메인페이지 접속시 로딩이 느리니까 필요할때 임포트 하셈
+const Detail = lazy (() => import('./routes/Detail.jsx'));
 
 
 export let Context1 = createContext()
@@ -19,7 +23,6 @@ function App() {
 
   useEffect(()=>{
     localStorage.setItem('watched', JSON.stringify([]))
-
   },[])
   
   let obj = {name : 'kim'}
@@ -30,7 +33,6 @@ function App() {
   // JSON.parse(꺼낸거)
   // console.log(JSON.parse(꺼낸거).name);
   
-
 
   let [shoes,setShoes] = useState(data)
   let navigate = useNavigate();
@@ -67,7 +69,7 @@ function App() {
         </Container>
       </Navbar>
 
-
+      <Suspense fallback={<div>로딩중</div>}>
       <Routes>
       <Route path='/' element={
         <div>
@@ -76,7 +78,7 @@ function App() {
         <div className="row">
       {
       shoes.map(function(a,i){
-        return <Card shoes={shoes} i={i} navigate={navigate}/>
+        return <Card shoes={shoes} i={i} navigate={navigate} key={i}/>
        })}
         </div>
         <button onClick={()=>{
@@ -124,6 +126,7 @@ function App() {
       </div> 
       </div>}/>
       <Route path='/detail/:id' element={
+        
         <Context1.Provider value={{ 재고 , shoes }}>
         <Detail  shoes={shoes}/> 
          </Context1.Provider>
@@ -142,6 +145,7 @@ function App() {
       </Route>
 
       </Routes>
+      </Suspense>
        
        
      
