@@ -13,17 +13,16 @@ import { memo,useState } from 'react'
 //   return  <div>자식임</div>
 // })
 
-// 컴포넌트 렌더링시 1회만 실행
-//useEffect랑 유사함,실행 시점의 차이
-
-function 함수(){
-  return 반복문10억번 돌린결과
-}
+// // 컴포넌트 렌더링시 1회만 실행
+// //useEffect랑 유사함,실행 시점의 차이
+// function 함수(){
+//   return 반복문10억번 돌린결과
+// }
 
 function Cart(){
 
-  let result = 함수();
-  useMemo(()=>{return 함수()},[state])
+  // let result = 함수();
+  // useMemo(()=>{return 함수()},[state])
 
   let state = useSelector((state)=> state)
   let dispatch = useDispatch()
