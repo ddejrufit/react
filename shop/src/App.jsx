@@ -20,11 +20,15 @@ export let Context1 = createContext()
 let a = 0;
 
 function App() {
-
+  
   useEffect(()=>{
     localStorage.setItem('watched', JSON.stringify([]))
   },[])
   
+
+
+
+
   let obj = {name : 'kim'}
   JSON.stringify(obj)
   localStorage.setItem('data',JSON.stringify(obj))
@@ -33,6 +37,19 @@ function App() {
   // JSON.parse(꺼낸거)
   // console.log(JSON.parse(꺼낸거).name);
   
+
+  
+  // sync,async
+  let [count, setCount] = useState(0);
+  let [age, setAge] = useState(20);
+  // useEffect사용해서 sync순서로 실행 되게
+  useEffect(()=>{
+    if( count != 0 && count < 3 ){
+      setAge(age+1)
+    }
+  }, [count])
+
+
 
   let [shoes,setShoes] = useState(data)
   let navigate = useNavigate();
@@ -54,11 +71,13 @@ function App() {
 
         <Navbar bg="dark" data-bs-theme="dark" >
         <Container>
+          
           <Navbar.Brand href="#home">쇼핑몰</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link onClick={()=>{navigate('/')}}>Home</Nav.Link>
             <Nav.Link onClick={()=>{navigate('/detail/0')}}>Detail</Nav.Link>
             <Nav.Link onClick={()=>{navigate('/cart')}}>Cart</Nav.Link>
+          
           </Nav>
           <Nav className='ms-auto' color='white' >
             { result.isLoading && '로딩중'}
@@ -75,6 +94,19 @@ function App() {
         <div>
          <div className='main-bg' style={{ backgroundImage : 'url(' + bg + ')'}}></div>
       <div className="container">
+      <div>
+
+        
+      <div>안녕하십니까 전 {age}</div>
+      <button onClick={()=>{
+
+        setCount(count+1);
+        // if(count < 3) {
+        //   setAge(age+1);
+        // }
+
+      }}>누르면한살먹기</button>
+      </div>
         <div className="row">
       {
       shoes.map(function(a,i){
@@ -150,7 +182,7 @@ function App() {
        
      
 
-
+        
     
 
 
