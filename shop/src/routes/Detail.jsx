@@ -5,6 +5,8 @@ import { Nav } from "react-bootstrap";
 import {Context1} from "./../App.jsx";
 import { addItem } from "../store.jsx";
 import { useDispatch } from "react-redux";
+import { useLike, useUsername } from "../hooks/like.jsx";
+import axios from "axios";
 
 let YellowBtn = styled.button`
   background : ${props => props.bg };
@@ -19,6 +21,12 @@ let Box  = styled.div`
 
 
 function Detail(props){
+
+ let [like, addLike]=useLike()
+ let username = useUsername()
+
+
+
 
   useEffect(()=>{
   let asd = localStorage.getItem('watched')
@@ -81,6 +89,12 @@ function Detail(props){
       setType(e.target.value) 
     }
 
+
+
+
+
+
+
     return(
       <div className={"container start "+ open}>
         <Box>
@@ -101,6 +115,9 @@ function Detail(props){
           <img src={`https://codingapple1.github.io/shop/shoes${props.shoes[id].id + 1}.jpg`} width="100%" />
         </div>
         <div className="col-md-6 mt-4">
+
+          {like} <span onClick={()=>{ addLike() }}>❤</span>
+          {username} 
           <h4 className="pt-5">{props.shoes[id].title}</h4>
           <p>{props.shoes[id].content}</p>
           <p>{props.shoes[id].price}원</p>
