@@ -10,16 +10,12 @@ app.use(express.json());
 var cors = require('cors');
 app.use(cors());
 
-app.use(express.static(path.join(__dirname,'react-project/build')))
 
-app.get('/',function(요청, 응답){
-  응답.sendFile(path.join(__dirname,'/react-project/build/index.html'))
+app.get('/blog',function(요청, 응답){
+  응답.sendFile(path.join(__dirname,'/react/blog/index.html'))
 })
 
-app.get('/product', function (요청, 응답) {
-  응답.json({name : 'black shoes'});
+app.get('/shop', function (요청, 응답) {
+  응답.sendFile(path.join(__dirname,'/react/shop/index.html'))
 });
 
-app.get('*', function (요청, 응답) {
-  응답.sendFile(path.join(__dirname, '/react-project/build/index.html'));
-});
